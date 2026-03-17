@@ -1,4 +1,5 @@
 import { Message } from "@/types";
+import CopyButton from "./copy-button";
 
 // message interface
 interface MessageBubbleProps {
@@ -38,7 +39,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
           {/* Copy button - only on AI messages */}
           {!isUser && (
             <div className="absolute -bottom-6 left-0 opacity-0 group-hover:opacity-100 transition-opacity">
-              {/* <CopyButton text={message.content} /> */}
+              <CopyButton text={message.content} />
             </div>
           )}
         </div>
