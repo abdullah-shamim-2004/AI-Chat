@@ -1,10 +1,12 @@
 // import Image from "next/image";
 
+import ChatWindow from "@/components/chat/chat-window";
+
 export default function Home() {
   return (
-    <div className="flex">
+    <div className="">
       <main>
-        <h1>Hello, I am Shamim</h1>
+        <ChatWindow />
       </main>
     </div>
   );
