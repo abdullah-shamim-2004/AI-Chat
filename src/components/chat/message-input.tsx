@@ -17,16 +17,10 @@ export default function MessageInput({
 }: MessageInputProps) {
   // input ref for focus on input
   const inputRef = useRef<HTMLInputElement>(null);
-  // handle submit
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (isLoading || !input.trim()) return;
-    onSubmit(e);
-    inputRef.current?.focus;
-  };
+
   return (
     <div className="border-t border-gray-200 px-4 py-4">
-      <form onSubmit={handleSubmit} className="flex gap-2 max-w-3xl mx-auto">
+      <form onSubmit={onSubmit} className="flex gap-2 max-w-3xl mx-auto">
         <Input
           ref={inputRef}
           value={input}

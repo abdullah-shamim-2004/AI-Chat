@@ -4,7 +4,7 @@ export interface Message {
   id: string;
   role: MessageRole;
   content: string;
-  creatAt: Date;
+  createdAt: Date;
 }
 
 // type for chat state

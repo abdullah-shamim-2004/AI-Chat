@@ -10,8 +10,9 @@
   },
   "dependencies": {
     "@ai-sdk/groq": "^3.0.29",
+    "@ai-sdk/react": "^3.0.136",
     "@base-ui/react": "^1.2.0",
-    "ai": "^6.0.116",
+    "ai": "^6.0.134",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.577.0",
