@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ai Chat",
+  title: "AI Chat",
   description:
     "This chat app is created with Groq ai and with next js and deploy on vercel.",
 };

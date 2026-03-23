@@ -20,14 +20,22 @@ export async function POST(req: Request) {
     }
 
     // get the model message
-    const ModelMessage = messages.map((m) => {
-      const content = m.parts.filter((p) => p.type === "text");
+    const ModelMessage = messages.map(
+      (m: {
+        role: "user" | "assistant";
+        parts: {
+          type: string;
+          text?: string;
+        }[];
+      }) => {
+        const content = m.parts.filter((p) => p.type === "text");
 
-      const texts = content.map((c) => c.text ?? "");
+        const texts = content.map((c) => c.text ?? "");
 
-      const joined = texts.join("");
-      return { role: m.role, content: joined };
-    });
+        const joined = texts.join("");
+        return { role: m.role, content: joined };
+      },
+    );
     console.log(ModelMessage);
 
     // call the groq and stream the response
