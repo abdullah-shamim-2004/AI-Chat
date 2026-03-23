@@ -1,9 +1,11 @@
 import { useRef } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { Square } from "lucide-react";
 // import { Textarea } from "../ui/textarea";
 interface MessageInputProps {
   input: string;
+  stop: () => void;
   isLoading: boolean;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent) => void;
@@ -11,6 +13,7 @@ interface MessageInputProps {
 
 export default function MessageInput({
   input,
+  stop,
   isLoading,
   onInputChange,
   onSubmit,
@@ -35,7 +38,11 @@ export default function MessageInput({
           disabled={isLoading || !input.trim()}
           className="rounded-xl px-6"
         >
-          {isLoading ? "..." : "Send"}
+          {isLoading ? (
+            <Square className="text-red-700" onClick={stop} />
+          ) : (
+            "Send"
+          )}
         </Button>
       </form>
       <p className="text-xs text-center text-gray-400 mt-2">

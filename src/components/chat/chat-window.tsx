@@ -17,6 +17,7 @@ export default function ChatWindow() {
     messages: rawMessages,
     sendMessage,
     status,
+    stop,
   } = useChat({
     transport: new DefaultChatTransport({ api: "api/chat" }),
     onError: (err) => {
@@ -71,6 +72,7 @@ export default function ChatWindow() {
       <MessageList messages={messages} isLoading={isLoading} />
       {/* Message Input */}
       <MessageInput
+        stop={stop}
         input={input}
         isLoading={isLoading}
         onInputChange={(e) => setInput(e.target.value)}
