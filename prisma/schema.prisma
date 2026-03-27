@@ -10,4 +10,16 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+ 
+}
+
+// define the user model
+model User {
+ id String @id @default(cuid())
+ email String @unique 
+ password String
+ createdAt DateTime @default(now())
+ updatedAt DateTime @updatedAt
+//  conversations Conversations[]
+
 }
