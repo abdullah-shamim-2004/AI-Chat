@@ -15,13 +15,33 @@ datasource db {
 // define the user model
 model User {
  id String @id @default(cuid())
- email String @unique 
- password String
+ name String?
+ email String? @unique 
+ emailVerified DateTime?
+ image String?
  createdAt DateTime @default(now())
  updatedAt DateTime @updatedAt
+ accounts Account[]
  conversations Conversations[]
 }
+// define the account model 
+model Account {
+  id String @id @default(cuid())
+  userId String
+  type String
+  provider String
+  providerAccountId String
+  refresh_token String?
+  access_token String?
+  expires_at Int?
+  token_type String?
+  scope String?
+  id_token String?
+  session_state String?
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider,providerAccountId])
 
+}
 // define conversation model
 model Conversations {
 id String @id @default(cuid())
