@@ -13,3 +13,15 @@ export interface ChatState {
   isLoading: boolean;
   error: string | null;
 }
+
+// Next auth session type
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      email: string;
+      name?: string | null;
+      image?: string | null;
+    };
+  }
+}
