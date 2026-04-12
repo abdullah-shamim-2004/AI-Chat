@@ -50,7 +50,7 @@ const loginpage = () => {
         </form>
         {/* Back Button */}
         <div className="text-center mt-3">
-          <Link className="text-sm " href="/">
+          <Link className="text-sm " href="/chat">
             Continue without signing in →{" "}
           </Link>
         </div>

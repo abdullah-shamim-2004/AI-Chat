@@ -9,10 +9,17 @@ import { Message } from "@/types";
 import MessageList from "./message-list";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { Session } from "next-auth";
 
-export default function ChatWindow() {
+// Interface of chat window props
+interface chatwindowprops {
+  session: Session | null;
+}
+
+export default function ChatWindow({ session }: chatwindowprops) {
   const [input, setInput] = useState("");
   const [error, setError] = useState<string | null>(null);
+  console.log(session);
 
   // import usechat to control everything
   const {
@@ -62,11 +69,15 @@ export default function ChatWindow() {
         </div>
         {/* Auth  section */}
         <div className="flex items-center gap-2">
-          <Link href={"/login"}>
-            <Button variant="default" className="cursor-pointer">
-              Sign In
-            </Button>
-          </Link>
+          {session ? (
+            "hi"
+          ) : (
+            <Link href={"/login"}>
+              <Button variant="default" className="cursor-pointer">
+                Sign In
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
       {/* Error Message */}
