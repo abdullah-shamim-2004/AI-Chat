@@ -1,5 +1,6 @@
 import { signIn } from "@/lib/auth";
-import { redirect } from 'next/navigation';
+import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 
 const loginpage = () => {
@@ -47,6 +48,16 @@ const loginpage = () => {
             Continue with Google
           </button>
         </form>
+        {/* Back Button */}
+        <div className="text-center mt-3">
+          <Link className="text-sm " href="/">
+            Continue without signing in →{" "}
+          </Link>
+        </div>
+        {/* Footer */}
+        <p className="text-center text-xs text-gray-400 mt-6">
+          By signing in, you agree to our terms of service
+        </p>
       </div>
     </div>
   );
