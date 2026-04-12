@@ -1,4 +1,5 @@
 import React from "react";
+import "../../app/globals.css";
 
 export default function AuthLayout({
   children,
@@ -8,7 +9,7 @@ export default function AuthLayout({
   return (
     <html lang="en">
       <body>
-        <main>{children}</main>;
+        <main className="max-w-screen-2xl mx-auto">{children}</main>;
       </body>
     </html>
   );

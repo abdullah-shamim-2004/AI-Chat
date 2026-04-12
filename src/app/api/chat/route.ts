@@ -36,7 +36,7 @@ export async function POST(req: Request) {
         return { role: m.role, content: joined };
       },
     );
-    console.log(ModelMessage);
+    // console.log(ModelMessage);
 
     // call the groq and stream the response
     const result = streamText({
