@@ -10,6 +10,7 @@ import MessageList from "./message-list";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { Session } from "next-auth";
+import Image from "next/image";
 
 // Interface of chat window props
 interface chatwindowprops {
@@ -19,7 +20,7 @@ interface chatwindowprops {
 export default function ChatWindow({ session }: chatwindowprops) {
   const [input, setInput] = useState("");
   const [error, setError] = useState<string | null>(null);
-  console.log(session);
+  // console.log(session);
 
   // import usechat to control everything
   const {
@@ -70,7 +71,24 @@ export default function ChatWindow({ session }: chatwindowprops) {
         {/* Auth  section */}
         <div className="flex items-center gap-2">
           {session ? (
-            "hi"
+            <>
+              <div>
+                {session.user.image && (
+                  <Image
+                    src={session.user.image}
+                    alt="avatar"
+                    className="w-7 h-7 rounded-full"
+                  />
+                )}
+                <span>{session.user.name}</span>
+              </div>
+              {/* Sign out button */}
+              <form>
+                <Button type="submit" variant="outline">
+                  Sign Out
+                </Button>
+              </form>
+            </>
           ) : (
             <Link href={"/login"}>
               <Button variant="default" className="cursor-pointer">

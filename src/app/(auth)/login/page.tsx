@@ -1,6 +1,6 @@
 import { signIn } from "@/lib/auth";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 import React from "react";
 
 const loginpage = () => {
@@ -19,7 +19,8 @@ const loginpage = () => {
         <form
           action={async () => {
             "use server";
-            await signIn("google", { redirectTo: "/" });
+            "use server";
+            await signIn("google", { redirectTo: "/chat" });
           }}
         >
           <button
