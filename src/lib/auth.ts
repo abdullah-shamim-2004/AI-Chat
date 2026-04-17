@@ -31,4 +31,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
   },
+  // logger: {
+  //   error(error) {
+  //     console.error("[AUTH ERROR]", error);
+  //     if (error && typeof error === "object" && "cause" in error) {
+  //       console.error("[AUTH CAUSE]", error.cause);
+  //     }
+  //   },
+  //   warn(code) {
+  //     console.warn("[AUTH WARN]", code);
+  //   },
+  // },
+  // debug: true,
 });
