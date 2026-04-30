@@ -1,4 +1,4 @@
-import "dotenv/config"
+import "dotenv/config";
 import { PrismaClient } from "@/generated/prisma/client";
 import { PrismaNeon } from "@prisma/adapter-neon";
 
@@ -13,7 +13,10 @@ export const db =
   globalForPrisma.prisma ??
   new PrismaClient({
     adapter,
-   
+    log:
+      process.env.NODE_ENV === "development"
+        ? ["error", "info", "query", "warn"]
+        : ["error"],
   });
 
 if (process.env.NODE_ENV !== "production") {

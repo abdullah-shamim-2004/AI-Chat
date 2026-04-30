@@ -72,12 +72,14 @@ export default function ChatWindow({ session }: chatwindowprops) {
         <div className="flex items-center gap-2">
           {session ? (
             <>
-              <div>
+              <div className="flex flex-col items-center justify-center">
                 {session.user.image && (
                   <Image
-                    src={session.user.image}
+                    src={session?.user?.image}
                     alt="avatar"
                     className="w-7 h-7 rounded-full"
+                    width={40}
+                    height={40}
                   />
                 )}
                 <span>{session.user.name}</span>
