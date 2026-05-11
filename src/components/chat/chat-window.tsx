@@ -82,7 +82,7 @@ export default function ChatWindow({ session }: chatwindowprops) {
                     height={40}
                   />
                 )}
-                <span>{session.user.name}</span>
+                <span>{session?.user?.name?.split(" ")[0]}</span>
               </div>
               {/* Sign out button */}
               <form>
