@@ -2,14 +2,7 @@
 
 "use client";
 
-import Link from "next/link";
-import {
-  MessageSquare,
-  Plus,
-  Trash2,
-  Settings,
-  PanelLeftClose,
-} from "lucide-react";
+import { MessageSquare, Plus } from "lucide-react";
 
 import {
   Sidebar,
@@ -17,85 +10,105 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { Session } from "next-auth";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
-const chats = [
-  {
-    title: "React chatbot project",
-    url: "/chat/1",
-  },
-  {
-    title: "Next.js learning",
-    url: "/chat/2",
-  },
-  {
-    title: "Portfolio ideas",
-    url: "/chat/3",
-  },
-];
+// interface of session
+interface AppsidebarProps {
+  session: Session | null;
+}
 
-export function Appsidebar() {
+export function Appsidebar({ session }: AppsidebarProps) {
+  const router = useRouter();
   return (
     <Sidebar className="border-r bg-background">
       {/* Header */}
-      <SidebarHeader className="border-b p-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold">AI Chat</h2>
-
-          {/* <PanelLeftClose className="h-5 w-5 text-muted-foreground" /> */}
+      <SidebarHeader>
+        <div className="flex items-center gap-2 px-2 py-1">
+          <span className="font-semibold text-sm">AI Chat</span>
         </div>
 
-        <Link
-          href="/"
-          className="mt-4 flex items-center gap-2 rounded-lg bg-primary px-3 py-2 text-sm text-primary-foreground transition hover:opacity-90"
+        {/* New Chat button */}
+        <Button
+          variant="outline"
+          size="sm"
+          className="mx-2 justify-start gap-2"
+          onClick={() => router.push("/chat")}
         >
-          <Plus className="h-4 w-4" />
-          New Chat
-        </Link>
+          <Plus size={14} />
+          New conversation
+        </Button>
       </SidebarHeader>
 
       {/* Chat List */}
       <SidebarContent>
         <SidebarGroup>
+          <SidebarGroupLabel>Conversations</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
-              {chats.map((chat) => (
-                <SidebarMenuItem key={chat.title}>
+            {!session ? ( // Not logged in
+              <div className="px-2 py-4 text-center">
+                <p className="text-xs text-muted-foreground mb-3">
+                  Sign in to save your conversations
+                </p>
+                <Button
+                  size="sm"
+                  className="w-full"
+                  onClick={() => router.push("/login")}
+                >
+                  Sign in
+                </Button>
+              </div>
+            ) : (
+              // Logged in — empty for now, we'll add real data next
+              <SidebarMenu>
+                <SidebarMenuItem>
                   <SidebarMenuButton>
-                    <Link
-                      href={chat.url}
-                      className="flex items-center justify-between"
-                    >
-                      <div className="flex items-center gap-2 overflow-hidden">
-                        <MessageSquare className="h-4 w-4 shrink-0" />
-
-                        <span className="truncate text-sm">{chat.title}</span>
-                      </div>
-                    </Link>
+                    <MessageSquare size={14} />
+                    <span>No conversations yet</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
+              </SidebarMenu>
+            )}
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
 
-      {/* Footer */}
-      <SidebarFooter className="border-t p-4">
-        <div className="space-y-2">
-          <button className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-muted">
-            <Settings className="h-4 w-4" />
-            Settings
-          </button>
-
-          <button className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-red-500 hover:bg-muted">
-            <Trash2 className="h-4 w-4" />
-            Clear Chats
-          </button>
+      {/* Footer — user info */}
+      <SidebarFooter>
+        <div className="px-2 py-2">
+          {session ? (
+            <div className="flex items-center gap-2">
+              {session.user.image && (
+                <Image
+                  width={40}
+                  height={40}
+                  src={session.user.image}
+                  alt="avatar"
+                  className="w-7 h-7 rounded-full"
+                />
+              )}
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-medium truncate">
+                  {session.user.name}
+                </p>
+                <p className="text-xs text-muted-foreground truncate">
+                  {session.user.email}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <p className="text-xs text-muted-foreground text-center">
+              Not signed in
+            </p>
+          )}
         </div>
       </SidebarFooter>
     </Sidebar>
